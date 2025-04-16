@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link" 
 
 const getSingleItem = async(id) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/readsingle/${id}`, {cache: "no-store"})
+    const response = await fetch(`http://localhost:3000/api/item/readsingle/${id}`, {cache: "no-store"})
     const jsonData = await response.json() 
     const singleItem = jsonData.singleItem
     return singleItem 
@@ -12,8 +12,6 @@ const ReadSingleItem = async(context) => {
     const singleItem = await getSingleItem(context.params.id)
     return (
         <div className="grid-container-si">
-            <title>{singleItem.title}</title>     
-            <meta name="description" content={singleItem.description}/>
             <div>
                 <Image src={singleItem.image} width={750} height={500} alt="item-image" priority/>
             </div>

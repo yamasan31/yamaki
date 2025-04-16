@@ -18,7 +18,7 @@ const useAuth = () => {
             try{
                 const secretKey = new TextEncoder().encode("next-market-app-book") 
                 const decodedJwt = await jwtVerify(token, secretKey) 
-                setLoginUserEmail("dumy@gmail.com")  
+                setLoginUserEmail(decodedJwt.payload.email)  
             }catch{
                 router.push("/user/login")
             }
