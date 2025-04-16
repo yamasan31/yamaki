@@ -1,12 +1,34 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        remotePatterns: [
+      remotePatterns: [
+        {
+          hostname: "res.cloudinary.com"
+        }
+      ]
+    },
+    async headers() {
+      return [
+        {
+          // すべてのAPIルートに適用
+          source: "/api/:path*",
+          headers: [
             {
-                hostname: "res.cloudinary.com"
+              key: "Access-Control-Allow-Origin",
+              value: "*" // すべてのオリジンを許可。必要に応じて特定のオリジンに制限できます
+            },
+            {
+              key: "Access-Control-Allow-Methods",
+              value: "GET, POST, OPTIONS"
+            },
+            {
+              key: "Access-Control-Allow-Headers",
+              value: "Content-Type"
             }
-        ]
+          ]
+        }
+      ];
     }
-};
-
-export default nextConfig;
+  };
+  
+  export default nextConfig;
